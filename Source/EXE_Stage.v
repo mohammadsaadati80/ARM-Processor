@@ -4,4 +4,6 @@ module EXE_Stage (
     output [31:0]PC
 );
     
+    assign PC = PC_in;
+
 endmodule
