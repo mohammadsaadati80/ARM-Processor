@@ -23,6 +23,7 @@
 	vlog 	+acc -source  +define+SIM -O0	$src_path/MEM_Stage_Reg.v
 	vlog 	+acc -source  +define+SIM -O0	$src_path/WB_Stage.v
 	vlog 	+acc -source  +define+SIM -O0	$src_path/WB_Stage_Reg.v
+	vlog 	+acc -source  +define+SIM -O0	$src_path/ARM.v
 	vlog 	+acc -source  +define+SIM -O0	Testbench/$TB.v
 
 #================================ simulation ====================================
