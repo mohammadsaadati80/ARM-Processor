@@ -4,11 +4,14 @@ module PC (
     output reg [31:0]PC_out
 );
     
-    always @ (posedge clk, posedge rst) begin
-    if (rst) PC_out <= 32'b0;
+  always @ (posedge clk, posedge rst) begin
+    if (rst) 
+      PC_out <= 32'b0;
     else begin
-      if (freeze) PC_out <= PC_out;
-      else PC_out <= PC_in;
+      if (freeze) 
+        PC_out <= PC_out;
+      else 
+        PC_out <= PC_in;
     end
   end
 
