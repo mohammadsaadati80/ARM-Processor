@@ -34,7 +34,7 @@
 #======================= adding signals to wave window ==========================
 
 	add wave -Binary -group 	 	{TB}				sim:/$TB/*
-#	add wave -Binary -group 	 	{top}				sim:/$TB/test/*
+	add wave -Binary -group 	 	{top}				sim:/$TB/test/*
 	add wave -Binary -group -r	    {all}				sim:/$TB/*
 
 #=========================== Configure wave signals =============================

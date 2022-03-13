@@ -2,12 +2,12 @@
 
 module Pipe_Line_Test_Bench ();
 
-    integer i;
-    reg clk, rst;
+    // integer i;
+    reg clk = 1, rst = 1;
  
     ARM test(clk, rst);
 
-    initial begin
+    /* initial begin
         rst = 1'b0;
         #35 rst = 1'b1;
         #35 rst = 1'b0;
@@ -15,7 +15,7 @@ module Pipe_Line_Test_Bench ();
             #100 clk = 1'b0;
             #100 clk = 1'b1;
         end
-    end
+    end */
 
     // reg clk = 1'b0, rst = 1'b0;
 
@@ -29,5 +29,16 @@ module Pipe_Line_Test_Bench ();
 	// 	#100
 	// 	rst = 1'b0;
 	// end
+
+    always #10 clk = ~clk;
+
+    initial begin
+
+        // #20 rst = 1;
+        #10 rst = 0;
+        
+        #200 $stop;
+    end
+
     
 endmodule

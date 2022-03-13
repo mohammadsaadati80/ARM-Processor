@@ -9,10 +9,10 @@ module IF_Stage (
 
     assign mux = Branch_taken ? BranchAddr : PC;
 
-    PC pc_reg (clk, rst, mux, freeze, pc_out);
+    PC pc_reg (clk, rst, freeze, mux, pc_out);
 
     assign PC = pc_out + 4;
 
-    Instruction_mem instruction_memory (clk, rst, pc_out, Instruction);
+    Instruction_mem _instruction_memory_ (clk, rst, PC, Instruction);
 
 endmodule
