@@ -13,6 +13,6 @@ module IF_Stage (
 
     assign PC = pc_out + 4;
 
-    Instruction_mem _instruction_memory_ (clk, rst, PC, Instruction);
+    Instruction_mem _instruction_memory_ (clk, rst, pc_out, Instruction);
 
 endmodule
