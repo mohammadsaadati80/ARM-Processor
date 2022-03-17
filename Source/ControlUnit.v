@@ -2,7 +2,6 @@ module ControlUnit (
   input [1:0]      mode,
   input [3:0]      Op_code,
   input            S_in,
-  
   output reg [3:0] Exe_Cmd,
   output reg       mem_read,  
   output reg       mem_write,  
@@ -11,7 +10,7 @@ module ControlUnit (
   output reg       B
   );
   
-  always @ (mode, Op_code, S_in) begin
+  always @(mode, Op_code, S_in) begin
     Exe_Cmd = 4'b0000;
     mem_read = 1'b0;
     mem_write = 1'b0;
