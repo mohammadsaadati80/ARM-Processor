@@ -1,5 +1,5 @@
 module ID_Stage (
-    input clk, rst, hazard, wb_wb_en
+    input clk, rst, hazard, wb_wb_en,
     input [3:0]sr, wb_dest,
     input [31:0]PC_in, instruction, wb_value,
     output wb_en, mem_r_en, mem_w_en, b, s, imm, two_src,
