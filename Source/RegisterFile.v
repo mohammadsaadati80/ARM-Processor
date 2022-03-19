@@ -14,11 +14,11 @@ module RegisterFile (
             for (i = 0 ; i < 15 ; i = i + 1)
                 registers[i] <= i;
         end
-        else if (writeBackEn) 
+        else if (writeBackEn) //todo might need to be if
             registers[Dest_wb] <= Result_wb;
 	end
 
     assign reg1 = registers[src1];
     assign reg2 = registers[src2];
 
-endmodule 
+endmodule
