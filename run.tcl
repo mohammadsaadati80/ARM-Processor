@@ -11,23 +11,7 @@
 
 #============================ Add verilog files  ===============================
 
-	vlog 	+acc -source  +define+SIM -O0	$src_path/EXE_Stage.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/EXE_Stage_Reg.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/ID_Stage.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/ID_Stage_Reg.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/IF_Stage.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/IF_Stage_Reg.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/Instruction_mem.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/PC.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/MEM_Stage.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/MEM_Stage_Reg.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/WB_Stage.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/WB_Stage_Reg.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/ARM.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/RegisterFile.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/ControlUnit.v
-	vlog 	+acc -source  +define+SIM -O0	$src_path/Condition_Check.v
-
+	vlog 	+acc -source  +define+SIM -O0	$src_path/*.v
 	vlog 	+acc -source  +define+SIM -O0	Testbench/$TB.v
 
 #================================ simulation ====================================
