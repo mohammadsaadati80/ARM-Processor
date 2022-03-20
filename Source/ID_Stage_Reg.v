@@ -5,10 +5,10 @@ module ID_Stage_Reg (
     input [23:0]imm_signed_24_in,
     input [31:0]PC_in, value_rn_in, value_rm_in,
     output reg wb_en, mem_r_en, mem_w_en, b, s, imm,
-    output reg [3:0]exe_cmd, value_rn, value_rm, dest, sr, src_1, src_2,
+    output reg [3:0]exe_cmd, dest, sr, src_1, src_2,
     output reg [11:0]shift_operand,
     output reg [23:0]imm_signed_24,
-    output reg [31:0]PC
+    output reg [31:0]PC, value_rn, value_rm
 );
 
     always @ (posedge clk, posedge rst) begin

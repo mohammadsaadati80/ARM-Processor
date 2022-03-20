@@ -42,7 +42,10 @@ module ID_Stage (
     assign src_2 = register_file_src_2;
 
     Condition_Check condition_check(cond, sr, condition_check_result);
-    RegisterFile register_file(clk, rst, rn, register_file_src_2, wb_dest, wb_value, wb_wb_en, value_rn, value_rm);
+
+    RegisterFile register_file(.clk(clk),.rst(rst),.src1(src_1),.src2(src_2),.Dest_wb(wb_dest),.Result_wb(wb_value),.writeBackEn(wb_wb_en),.reg1(value_rn),.reg2(value_rm));
+
+    // RegisterFile register_file(clk, rst, rn, register_file_src_2, wb_dest, wb_value, wb_wb_en, value_rn, value_rm);
     ControlUnit control_unit(mode, op_code, s_in, exe_cmd_ouput, mem_r_en_output, mem_w_en_output, wb_en_output, s_output, b_output);
 
 endmodule
