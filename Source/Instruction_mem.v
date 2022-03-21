@@ -4,7 +4,7 @@ module Instruction_mem (
     output reg [31:0]Instruction
 );
 
-    reg [16:0] _Instruction[0:31];
+    reg [7:0] _Instruction[71:0];
   
     always @ (*) begin
         if (rst) begin
@@ -25,6 +25,7 @@ module Instruction_mem (
             {_Instruction[59], _Instruction[58], _Instruction[57], _Instruction[56]} = 32'b0000_00_0_0100_0_0010_0010_000000000010;
             {_Instruction[63], _Instruction[62], _Instruction[61], _Instruction[60]} = 32'b1110_00_1_1101_0_0000_0000_101100000001;
             {_Instruction[67], _Instruction[66], _Instruction[65], _Instruction[64]} = 32'b1110_01_0_0100_0_0000_0001_000000000000;
+            {_Instruction[71], _Instruction[70], _Instruction[69], _Instruction[68]} = 32'b1110_01_0_0100_1_0000_1011_000000000000;
         end else 
             Instruction <= {_Instruction[PC + 2'b11], _Instruction[PC + 2'b10], _Instruction[PC + 2'b01], _Instruction[PC + 2'b00]};  
   end
