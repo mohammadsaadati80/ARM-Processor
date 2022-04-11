@@ -1,18 +1,21 @@
 module ARM (input clk,rst);
 
-    //TODO Need to be completed
-
 	wire freeze, branch_tacken, flush, hazard, wb_wb_en, wb_en_id, mem_r_en_id, mem_w_en_id, b_id, s_id, imm_id;
 	wire two_src_id, wb_en_id_reg, mem_r_en_id_reg, mem_w_en_id_reg, b_id_reg, s_id_reg, imm_id_reg;
+	wire wb_en_exe, mem_r_en_exe, mem_w_en_exe, wb_en_exe_reg, mem_r_en_exe_reg, mem_w_en_exe_reg, wb_en_mem, mem_r_en_mem; 
+	wire mem_w_en_mem, wb_en_mem_reg, mem_r_en_mem_reg;
 	wire [3:0]sr, wb_dest, exe_cmd_id, dest_id, src_1_id, src_2_id, exe_cmd_id_reg, dest_id_reg;
+	wire [3:0] dest_mem_reg, sr_id_reg, status_exe, dest_exe, dest_exe_reg, dest_mem;
 	wire [11:0]shift_operand_id, shift_operand_id_reg;
 	wire [23:0]imm_signed_24_id, imm_signed_24_id_reg;
 	wire [31:0]pc, branch_address, instruction, pc_if_reg, instruction_if_reg, wb_value, pc_id, value_rn_id, value_rm_id;
 	wire [31:0]pc_id_reg, value_rn_id_reg, value_rm_id_reg, pc_exe, pc_exe_reg, pc_mem, pc_mem_reg, pc_wb;
+	wire [31:0] alu_result_exe, br_addr_exe, val_rm_exe, alu_result_exe_reg, st_val_exe_reg, val_rm_exe_reg, alu_result_mem;
+	wire [31:0] data_memory_mem, alu_result_mem_reg, data_memory_out_mem_reg;
 
-	IF_Stage if_stage(.clk(clk),.rst(rst),.freeze(freeze),.Branch_taken(branch_tacken),.BranchAddr(branch_address),.PC(pc),.Instruction(instruction));
-	IF_Stage_Reg if_stage_reg(.clk(clk),.rst(rst),.freeze(freeze),.flush(flush),.PC_in(pc),. Instruction_in(instruction),.PC(pc_if_reg),.Instruction(instruction_if_reg));
-
+	IF_Stage if_stage(.clk(clk),.rst(rst),.freeze(hazard),.Branch_taken(b_id_reg),.BranchAddr(br_addr_exe),.PC(pc),.Instruction(instruction));
+	IF_Stage_Reg if_stage_reg(.clk(clk),.rst(rst),.freeze(hazard),.flush(b_id_reg),.PC_in(pc),. Instruction_in(instruction),.PC(pc_if_reg),.Instruction(instruction_if_reg));
+	//TODO Need to be completed
 	ID_Stage id_stage(.clk(clk),.rst(rst),.hazard(hazard),.wb_wb_en(wb_wb_en),.sr(sr),.wb_dest(wb_dest),.PC_in(pc_if_reg),
 					  .instruction(instruction_if_reg),.wb_value(wb_value),.wb_en(wb_en_id),.mem_r_en(mem_r_en_id),.mem_w_en(mem_w_en_id),
 					  .b(b_id),.s(s_id),.imm(imm_id),.two_src(two_src_id),.exe_cmd(exe_cmd_id),.dest(dest_id),.src_1(src_1_id),.src_2(src_2_id),.shift_operand(shift_operand_id),
