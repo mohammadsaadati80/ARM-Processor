@@ -5,7 +5,9 @@ module Instruction_mem (
 );
 
     reg [7:0] _Instruction[71:0];
-  
+    
+    //TODO Need to be completed
+
     always @ (*) begin
         if (rst) begin
             {_Instruction[3],  _Instruction[2],  _Instruction[1],  _Instruction[0]} =  32'b1110_00_1_1101_0_0000_0000_000000010100;

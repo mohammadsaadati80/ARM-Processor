@@ -23,7 +23,7 @@ module Val2Generator(input clk, rst, imm, select, input [11:0]shift_operand, inp
                                 2'b01: begin val_2 = rm >> shift_imm; end
                                 2'b10: begin val_2 = rm >>> shift_imm; end
                                 2'b11: begin val_2 = {{rm}, {rm}} >> shift_imm; end
-                            endcase
+                            endcase else val_2 = rm;
                         end
                     end
                 endcase

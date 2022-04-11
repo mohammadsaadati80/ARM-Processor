@@ -28,7 +28,9 @@ module ALU (input clk, rst, input [31:0] val_1, val_2, input [3:0] exe_cmd, sr_i
             if ((val_1[31] == (~val_2[31])) && (val_1[31] == (~alu_result[31]))) v = 1'b1;
         end
         4'b0101: begin
-            {c, alu_result} = val_1 - val_2 - (~c_in);
+            /* {c, alu_result} = val_1 - val_2 - (~c_in);
+            if ((val_1[31] == (~val_2[31])) && (val_1[31] == (~alu_result[31]))) v = 1'b1; */
+            {c, alu_result} = val_1 - val_2 - {{31'b0000000000000000000000000000000}, ~(c_in)};
             if ((val_1[31] == (~val_2[31])) && (val_1[31] == (~alu_result[31]))) v = 1'b1;
         end
         4'b0110: begin alu_result = val_1 & val_2; end
@@ -48,12 +50,6 @@ module ALU (input clk, rst, input [31:0] val_1, val_2, input [3:0] exe_cmd, sr_i
         alu_result = val_1 + val_2;
         end
         */
-        4'bxxxx: begin  // Instruction: B   Operation:
-        //
-        end
-        default: begin
-        //
-        end
     endcase
 
     n = alu_result[31];    

@@ -18,5 +18,4 @@ module EXE_Stage_Reg (input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in, input 
             dest <= dest_in;
         end
     end
-
 endmodule

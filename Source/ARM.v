@@ -1,5 +1,7 @@
 module ARM (input clk,rst);
 
+    //TODO Need to be completed
+
 	wire freeze, branch_tacken, flush, hazard, wb_wb_en, wb_en_id, mem_r_en_id, mem_w_en_id, b_id, s_id, imm_id;
 	wire two_src_id, wb_en_id_reg, mem_r_en_id_reg, mem_w_en_id_reg, b_id_reg, s_id_reg, imm_id_reg;
 	wire [3:0]sr, wb_dest, exe_cmd_id, dest_id, src_1_id, src_2_id, exe_cmd_id_reg, dest_id_reg;
@@ -7,7 +9,6 @@ module ARM (input clk,rst);
 	wire [23:0]imm_signed_24_id, imm_signed_24_id_reg;
 	wire [31:0]pc, branch_address, instruction, pc_if_reg, instruction_if_reg, wb_value, pc_id, value_rn_id, value_rm_id;
 	wire [31:0]pc_id_reg, value_rn_id_reg, value_rm_id_reg, pc_exe, pc_exe_reg, pc_mem, pc_mem_reg, pc_wb;
-  
 
 	IF_Stage if_stage(.clk(clk),.rst(rst),.freeze(freeze),.Branch_taken(branch_tacken),.BranchAddr(branch_address),.PC(pc),.Instruction(instruction));
 	IF_Stage_Reg if_stage_reg(.clk(clk),.rst(rst),.freeze(freeze),.flush(flush),.PC_in(pc),. Instruction_in(instruction),.PC(pc_if_reg),.Instruction(instruction_if_reg));

@@ -1,14 +1,5 @@
-module ControlUnit (
-  input [1:0]      mode,
-  input [3:0]      Op_code,
-  input            S_in,
-  output reg [3:0] Exe_Cmd,
-  output reg       mem_read,  
-  output reg       mem_write,  
-  output reg       WB_Enable,
-  output reg       S,
-  output reg       B
-  );
+module ControlUnit(input [1:0]mode, input [3:0]Op_code, input S_in, output reg [3:0]Exe_Cmd,
+	output reg mem_read, mem_write, WB_Enable, S, B);
   
   always @(mode, Op_code, S_in) begin
     Exe_Cmd = 4'b0000;
@@ -87,13 +78,13 @@ module ControlUnit (
             Exe_Cmd = 4'b0010;
             mem_read = 1'b1;
             WB_Enable = 1'b1;
-            S = 1'b1;
+            // S = 1'b1;
           end
           1'b0: begin 
             Exe_Cmd = 4'b0010;
             mem_write = 1'b1;
-            WB_Enable = 1'b0;
-            S = 1'b0;
+            // WB_Enable = 1'b0;
+            // S = 1'b0;
           end
           default: begin
           end
