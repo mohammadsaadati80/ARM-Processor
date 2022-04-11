@@ -5,8 +5,6 @@ module Instruction_mem (
 );
 
     reg [7:0] _Instruction[187:0];
-    
-    //TODO Need to be completed
 
     always @ (*) begin
         if (rst) begin
