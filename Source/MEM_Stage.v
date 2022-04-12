@@ -11,6 +11,6 @@ module MEM_Stage(input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in,
     assign mem_w_en = mem_w_en_in;
     assign alu_result_out = alu_result; 
 
-    DataMemory data_memory (clk, rst, mem_r_en_in, mem_w_en_in, alu_result, rm_val, data_memory_out);
+    Data_Memory data_memory (clk, rst, mem_r_en_in, mem_w_en_in, alu_result, rm_val, data_memory_out);
 
 endmodule

@@ -16,7 +16,7 @@ module ARM (input clk,rst);
 	IF_Stage if_stage(.clk(clk),.rst(rst),.freeze(hazard),.Branch_taken(b_id_reg),.BranchAddr(br_addr_exe),.PC(pc),.Instruction(instruction));
 	IF_Stage_Reg if_stage_reg(.clk(clk),.rst(rst),.freeze(hazard),.flush(b_id_reg),.PC_in(pc),. Instruction_in(instruction),.PC(pc_if_reg),.Instruction(instruction_if_reg));
 
-	Hazard_Detection_Unit hazard_detection_unit (.clk(clk),.rst(rst), .exe_wb_en(wb_en_exe), .mem_wb_en(wb_en_mem), .two_src(two_src_id)
+	Hazard_Detection_Unit hazard_detection_unit (.clk(clk),.rst(rst), .exe_wb_en(wb_en_exe), .mem_wb_en(wb_en_mem), .two_src(two_src_id),
 												.src_1(src_1_id), .src_2(src_2_id), .exe_dest(dest_exe), .mem_dest(dest_mem), .hazard_detected(hazard));
 
 	ID_Stage id_stage(.clk(clk),.rst(rst),.hazard(hazard),.wb_wb_en(wb_wb_en),.sr(sr),.wb_dest(wb_dest),.PC_in(pc_if_reg),
