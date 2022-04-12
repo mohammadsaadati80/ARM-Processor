@@ -1,12 +1,12 @@
 module EXE_Stage (
     input clk, rst,wb_en_in, mem_r_en_in, mem_w_en_in, imm,
-    input [3:0]exe_cmd, sr,
+    input [3:0]exe_cmd, sr, dest_in,
     input [11:0] shift_operand,
     input [23:0] imm_signed_24,
     input [31:0]PC_in, val_rn, val_rm,
     output wb_en, mem_r_en, mem_w_en,
-    output [3:0]status,
-    output [31:0]alu_result, br_addr
+    output [3:0]status, dest,
+    output [31:0]alu_result, br_addr, val_rm_out
 );
     
     wire or_output;
@@ -16,6 +16,8 @@ module EXE_Stage (
     assign wb_en = wb_en_in;
     assign mem_r_en = mem_r_en_in;
     assign mem_w_en = mem_w_en_in;
+    assign val_rm_out = val_rm;
+    assign dest = dest_in;
 
     assign br_addr = PC_in + ({{8{imm_signed_24[23]}}, {imm_signed_24}} << 2);
     ALU alu (clk, rst, val_rn, val_2, exe_cmd, sr, alu_result, status);
