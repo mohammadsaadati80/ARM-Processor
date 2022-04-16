@@ -4,7 +4,7 @@ module Instruction_mem (
     output reg [31:0]Instruction
 );
 
-    reg [7:0] _Instruction[187:0];
+    reg [7:0] _Instruction[191:0];
 
     always @ (*) begin
         if (rst) begin

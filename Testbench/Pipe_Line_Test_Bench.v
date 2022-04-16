@@ -5,7 +5,7 @@ module Pipe_Line_Test_Bench ();
     // integer i;
     reg clk = 1, rst = 1;
  
-    // ARM test(clk, rst);
+    ARM test(clk, rst);
 
     // initial begin
     //     rst = 1'b0;
