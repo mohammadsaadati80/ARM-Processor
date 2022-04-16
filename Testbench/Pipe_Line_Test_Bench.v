@@ -5,17 +5,17 @@ module Pipe_Line_Test_Bench ();
     // integer i;
     reg clk = 1, rst = 1;
  
-    ARM test(clk, rst);
+    // ARM test(clk, rst);
 
-    /* initial begin
-        rst = 1'b0;
-        #35 rst = 1'b1;
-        #35 rst = 1'b0;
-        for (i = 0; i < 10; i=i+1) begin
-            #100 clk = 1'b0;
-            #100 clk = 1'b1;
-        end
-    end */
+    // initial begin
+    //     rst = 1'b0;
+    //     #35 rst = 1'b1;
+    //     #35 rst = 1'b0;
+    //     for (i = 0; i < 330; i=i+1) begin
+    //         #100 clk = 1'b0;
+    //         #100 clk = 1'b1;
+    //     end
+    // end
 
     // reg clk = 1'b0, rst = 1'b0;
 

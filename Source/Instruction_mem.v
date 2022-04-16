@@ -33,9 +33,9 @@ module Instruction_mem (
             {_Instruction[91], _Instruction[90], _Instruction[89], _Instruction[88]} = 32'b1110_01_0_0100_0_0000_0110_000000010100;
             {_Instruction[95], _Instruction[94], _Instruction[93], _Instruction[92]} = 32'b1110_01_0_0100_1_0000_1010_000000000100;
             {_Instruction[99],  _Instruction[98],  _Instruction[97], _Instruction[96]} = 32'b1110_01_0_0100_0_0000_0111_000000011000;
-            {_Instruction[103],  _Instruction[102],  _Instruction[101], _Instruction[100]} = 32'b1110_00_1_1101_0_0000_0001_000000000100;
-            {_Instruction[107],  _Instruction[106],  _Instruction[105], _Instruction[104]} = 32'b1110_00_1_1101_0_0000_0010_000000000000;
-            {_Instruction[111],  _Instruction[110],  _Instruction[109], _Instruction[108]} = 32'b1110_00_1_1101_0_0000_0011_000000000000;
+            {_Instruction[103], _Instruction[102], _Instruction[101], _Instruction[100]} = 32'b1110_00_1_1101_0_0000_0001_000000000100;
+            {_Instruction[107], _Instruction[106], _Instruction[105], _Instruction[104]} = 32'b1110_00_1_1101_0_0000_0010_000000000000;
+            {_Instruction[111], _Instruction[110], _Instruction[109], _Instruction[108]} = 32'b1110_00_1_1101_0_0000_0011_000000000000;
             {_Instruction[115], _Instruction[114], _Instruction[113], _Instruction[112]} = 32'b1110_00_0_0100_0_0000_0100_000100000011;
             {_Instruction[119], _Instruction[118], _Instruction[117], _Instruction[116]} = 32'b1110_01_0_0100_1_0100_0101_000000000000;
             {_Instruction[123], _Instruction[122], _Instruction[121], _Instruction[120]} = 32'b1110_01_0_0100_1_0100_0110_000000000100;

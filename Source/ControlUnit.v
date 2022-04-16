@@ -59,12 +59,12 @@ module ControlUnit(input [1:0]mode, input [3:0]Op_code, input S_in, output reg [
           end
           4'b1010: begin  
             Exe_Cmd = 4'b0100;
-            WB_Enable = 1'b0;
+            // WB_Enable = 1'b0;
             S = 1'b1;
           end
           4'b1000: begin 
             Exe_Cmd = 4'b0110;
-            WB_Enable = 1'b0;
+            //WB_Enable = 1'b0;
             S = 1'b1;
           end
           default: begin
