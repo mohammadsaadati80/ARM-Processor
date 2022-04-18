@@ -37,7 +37,7 @@ module Pipe_Line_Test_Bench ();
         // #20 rst = 1;
         #10 rst = 0;
         
-        #500 $stop;
+        #5000 $stop;
     end
 
     

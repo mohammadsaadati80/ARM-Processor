@@ -7,6 +7,6 @@ module IF_Stage (input clk, rst, branch_tacken,
   assign mux = branch_tacken ? branch_address : pc;
   
   PC pc_reg (clk, rst, mux, freeze, pc_out);
-  Instruction_Memory instruction_memory (clk, rst, pc_out, instruction);
+  Instruction_mem instruction_memory (clk, rst, pc_out, instruction);
 
 endmodule

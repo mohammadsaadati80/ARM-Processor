@@ -19,7 +19,7 @@ module ID_Stage (input clk, rst, input [31:0]pc_in, instruction,
   
   assign cond = instruction[31:28];
   
-  ConditionCheck condition_check(cond, sr, condition_check_result);
+  Condition_Check condition_check(cond, sr, condition_check_result);
   
   wire or_output;
   wire [3:0] exe_cmd_ouput;

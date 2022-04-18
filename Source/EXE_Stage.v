@@ -9,12 +9,12 @@ module EXE_Stage ( input clk, rst, input [3:0]exe_cmd,
   
   wire [31:0] val_2, forwarding_val_1, forwarding_val_2;
   
-  MUX_3x1 mux_2 (clk, rst, val_rm, mem_val, wb_val, sel_src_2, forwarding_val_2);
+  MUX mux_2 (clk, rst, val_rm, mem_val, wb_val, sel_src_2, forwarding_val_2);
   Val2Generator val_2_generator (clk, rst, forwarding_val_2, shift_operand, imm, or_output, val_2);
   
   assign br_addr = pc_in + ({{8{imm_signed_24[23]}}, {imm_signed_24}} << 2);
     
-  MUX_3x1 mux_1 (clk, rst, val_rn, mem_val, wb_val, sel_src_1, forwarding_val_1);
+  MUX mux_1 (clk, rst, val_rn, mem_val, wb_val, sel_src_1, forwarding_val_1);
   ALU alu (clk, rst, forwarding_val_1, val_2, exe_cmd, sr, alu_result, status);
   
   assign dest = dest_in;
