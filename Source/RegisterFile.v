@@ -1,24 +1,17 @@
-module RegisterFile (
-	input clk, rst, 
-    input [3:0] src1, src2, Dest_wb,
-	input[31:0] Result_wb,
-    input writeBackEn,
-	output [31:0] reg1,reg2
-);
-    
-    reg[31:0] registers[0:14];
-    integer i = 0;
+module RegisterFile (input clk, rst, input [3:0]src_1, src_2, dest_wb, input [31:0]result_wb,
+  input write_back_en, output [31:0]reg_1, reg_2);
+  
+  reg [31:0] registers [0:14];
+  assign reg_1 = registers[src_1];
+  assign reg_2 = registers[src_2];
+  
+  always @ (negedge clk) begin
+    if (write_back_en) registers[dest_wb] <= result_wb;
+  end
 
-    always @(negedge clk, posedge rst) begin
-		if (rst) begin
-            for (i = 0 ; i < 15 ; i = i + 1)
-                registers[i] <= i;
-        end
-        else if (writeBackEn) //todo might need to be if
-            registers[Dest_wb] <= Result_wb;
-	end
-
-    assign reg1 = registers[src1];
-    assign reg2 = registers[src2];
-
+  integer i;
+  always @ (posedge rst) begin
+    if (rst) for (i = 0; i < 15; i=i+1) registers[i] <= i;
+  end
+  
 endmodule

@@ -1,17 +1,10 @@
-module PC (
-    input clk, rst, freeze,
-    input [31:0]PC_in,
-    output reg [31:0]PC_out
-);
-    
+module PC ( input clk, rst, input [31:0]pc_in, input freeze, output reg [31:0]pc_out);
+  
   always @ (posedge clk, posedge rst) begin
-    if (rst) 
-      PC_out <= 32'b0;
+    if (rst) pc_out <= 32'b0;
     else begin
-      if (freeze) 
-        PC_out <= PC_out;
-      else 
-        PC_out <= PC_in;
+      if (freeze) pc_out <= pc_out;
+      else pc_out <= pc_in;
     end
   end
 
