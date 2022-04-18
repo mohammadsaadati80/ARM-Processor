@@ -1,26 +1,29 @@
-module Condition_Check (input [3:0]cond, SR, output reg cond_state_result);
+module Condition_Check (input [3:0]cond, sr, output reg result);
+
+  wire z, c, n, v;  
+  assign {z, c, n, v} = sr;
   
-	wire z, c, n, v; 
-	assign {z, c, n, v} = SR;
-	always @(cond, z, c, n, v) begin
-	cond_state_result = 1'b0;
-		case(cond)
-			4'b0000 : cond_state_result = z;
-			4'b0001 : cond_state_result = ~z;
-			4'b0010 : cond_state_result = c;
-			4'b0011 : cond_state_result = ~c;
-			4'b0100 : cond_state_result = n;
-			4'b0101 : cond_state_result = ~n;
-			4'b0110 : cond_state_result = v;
-			4'b0111 : cond_state_result = ~v;
-			4'b1000 : cond_state_result = c & ~z;
-			4'b1001 : cond_state_result = ~c | z;
-			4'b1010 : cond_state_result = (n & v) | (~n & ~v);
-			4'b1011 : cond_state_result = (n & ~v) | (~n & v);
-			4'b1100 : cond_state_result = ~z & ((n & v) | (~n & ~v));
-			4'b1101 : cond_state_result = z | (n & ~v) | (~n & ~v);
-			4'b1110 : cond_state_result = 1'b1;
-			default: cond_state_result = 1'b0;     
-		endcase
-	end
+  always @ (cond, sr) begin
+    
+    result = 1'b0;
+
+    case (cond)
+      4'b0000: begin if (z == 1'b1) result = 1'b1; end
+      4'b0001: begin if (z == 1'b0) result = 1'b1; end
+      4'b0010: begin if (c == 1'b1) result = 1'b1; end
+      4'b0011: begin if (c == 1'b0) result = 1'b1; end
+      4'b0100: begin if (n == 1'b1) result = 1'b1; end
+      4'b0101: begin if (n == 1'b0) result = 1'b1; end
+      4'b0110: begin if (v == 1'b1) result = 1'b1; end
+      4'b0111: begin if (v == 1'b0) result = 1'b1; end
+      4'b1000: begin if ((c == 1'b1) && (z == 1'b0)) result = 1'b1; end
+      4'b1001: begin if ((c == 1'b0) && (z == 1'b1)) result = 1'b1; end
+      4'b1010: begin if (n == v) result = 1'b1; end
+      4'b1011: begin if (n != v) result = 1'b1; end
+      4'b1100: begin if ((z == 1'b0) && (n == v)) result = 1'b1; end
+      4'b1101: begin if ((z == 1'b1) && (n != v)) result = 1'b1; end
+      4'b1110: begin result = 1'b1; end
+      default: result = 1'b0;
+    endcase
+  end
 endmodule
