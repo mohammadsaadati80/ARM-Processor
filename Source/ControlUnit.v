@@ -1,8 +1,8 @@
 module ControlUnit (input [1:0]mode, input [3:0]op_code, input s_in,
   output reg [3:0] exe_cmd, output reg mem_r_en, mem_w_en, wb_en, s, b);
   
-  always @ (mode, op_code, s_in) begin
-    s = 1'b0; b = 1'b0; mem_w_en = 1'b0; mem_r_en = 1'b0; exe_cmd = 4'b0000; wb_en = 1'b0;    
+  always @ (op_code, mode, s_in) begin
+    mem_w_en = 1'b0; mem_r_en = 1'b0; exe_cmd = 4'b0000; wb_en = 1'b0; s = 1'b0; b = 1'b0;
     case (mode)
       2'b00: begin
         case (op_code)

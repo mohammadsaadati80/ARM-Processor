@@ -15,11 +15,8 @@ module ID_Stage (input clk, rst, input [31:0]pc_in, instruction,
   assign rd = instruction[15:12];
   assign rn = instruction[19:16];
 
-  assign cond = instruction[31:28];
-  assign register_file_src_2 = mem_w_en ? rd : rm;
-  assign or_output = (hazard || (~condition_check_result));
-  assign {exe_cmd, mem_r_en, mem_w_en, wb_en, s, b} = or_output ? 9'b000000000 :
-         {exe_cmd_ouput, mem_r_en_output, mem_w_en_output, wb_en_output, s_output, b_output};
+  assign src_1 = rn;
+  assign src_2 = register_file_src_2;
   
   assign s_in = instruction[20];
   assign mode = instruction[27:26];
@@ -31,10 +28,13 @@ module ID_Stage (input clk, rst, input [31:0]pc_in, instruction,
   assign shift_operand = instruction[11:0];
   assign imm_signed_24 = instruction[23:0];
 
-  assign two_src = ((~instruction[25]) || mem_w_en);
+  assign cond = instruction[31:28];
+  assign register_file_src_2 = mem_w_en ? rd : rm;
+  assign or_output = (hazard || (~condition_check_result));
+  assign {exe_cmd, mem_r_en, mem_w_en, wb_en, s, b} = or_output ? 9'b000000000 :
+         {exe_cmd_ouput, mem_r_en_output, mem_w_en_output, wb_en_output, s_output, b_output};
 
-  assign src_1 = rn;
-  assign src_2 = register_file_src_2;
+  assign two_src = ((~instruction[25]) || mem_w_en);
 
   Condition_Check condition_check(cond, sr, condition_check_result);
   RegisterFile register_file(clk, rst, rn, register_file_src_2, wb_dest, wb_value, wb_wb_en, value_rn, value_rm);
