@@ -1,7 +1,7 @@
 module EXE_Stage (input clk, rst, input [3:0] exe_cmd,
   input wb_en_in, mem_r_en_in, mem_w_en_in, input [31:0] pc_in, val_rn, val_rm, input imm, input [11:0] shift_operand,
-  input [23:0] imm_signed_24, input [3:0] sr, [3:0] dest_in, output wb_en, mem_r_en, mem_w_en,
-  output [31:0] alu_result, br_addr, output [3:0] status, output [31:0] val_rm_out, output [3:0]dest);
+  input [23:0]imm_signed_24, input [3:0]sr, dest_in, output wb_en, mem_r_en, mem_w_en,
+  output [31:0]alu_result, br_addr, output [3:0] status, output [31:0] val_rm_out, output [3:0]dest);
   
   wire or_output;
   wire [31:0] val_2;
