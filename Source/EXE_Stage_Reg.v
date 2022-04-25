@@ -4,20 +4,13 @@ module EXE_Stage_Reg (input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in, input 
 
   always @ (posedge clk, posedge rst) begin
     if (rst) begin      
-      wb_en <= 1'b0;
-      dest <= 4'b0000;
-      mem_r_en <= 1'b0;
-      mem_w_en <= 1'b0;
       val_rm <= 32'b00000000000000000000000000000000;
       alu_result <= 32'b00000000000000000000000000000000;
+      dest <= 4'b0000; wb_en <= 1'b0; mem_w_en <= 1'b0; mem_r_en <= 1'b0;
     end else begin
-      dest <= dest_in;
-      wb_en <= wb_en_in;
-      val_rm <= val_rm_in;
-      mem_r_en <= mem_r_en_in;
-      mem_w_en <= mem_w_en_in;
-      alu_result <= alu_result_in;
+      val_rm <= val_rm_in; wb_en <= wb_en_in; dest <= dest_in;
+      mem_r_en <= mem_r_en_in; mem_w_en <= mem_w_en_in; alu_result <= alu_result_in;
     end
   end
-
+  
 endmodule

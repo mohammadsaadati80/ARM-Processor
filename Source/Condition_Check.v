@@ -4,9 +4,7 @@ module Condition_Check (input [3:0]cond, sr, output reg result);
   assign {z, c, n, v} = sr;
   
   always @ (cond, sr) begin
-    
     result = 1'b0;
-
     case (cond)
       4'b0000: begin if (z == 1'b1) result = 1'b1; end
       4'b0001: begin if (z == 1'b0) result = 1'b1; end

@@ -5,16 +5,15 @@ module EXE_Stage (input clk, rst, input [3:0] exe_cmd,
   
   wire or_output;
   wire [31:0] val_2;
+  assign dest = dest_in;
+  assign wb_en = wb_en_in;
+  assign val_rm_out = val_rm;
+  assign mem_r_en = mem_r_en_in;
+  assign mem_w_en = mem_w_en_in;
   assign or_output = mem_r_en_in || mem_w_en_in;
   assign br_addr = pc_in + ({{8{imm_signed_24[23]}}, {imm_signed_24}} << 2);
 
-  Val2Generator val_2_generator (clk, rst, val_rm, shift_operand, imm, or_output, val_2);
   ALU alu (clk, rst, val_rn, val_2, exe_cmd, sr, alu_result, status);
-  
-  assign wb_en = wb_en_in;
-  assign mem_r_en = mem_r_en_in;
-  assign mem_w_en = mem_w_en_in;
-  assign val_rm_out = val_rm;
-  assign dest = dest_in;
+  Val2Generator val_2_generator (clk, rst, val_rm, shift_operand, imm, or_output, val_2);
 
 endmodule

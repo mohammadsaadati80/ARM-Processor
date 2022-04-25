@@ -1,5 +1,4 @@
-module HazardDetectionUnit (input clk, rst,
-  input [3:0]src_1, src_2, exe_dest, input exe_wb_en,
+module HazardDetectionUnit (input clk, rst, input [3:0]src_1, src_2, exe_dest, input exe_wb_en,
   input [3:0]mem_dest, input mem_wb_en, two_src, output reg hazard_detected);
   
   always @ (*) begin

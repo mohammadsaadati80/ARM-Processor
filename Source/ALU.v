@@ -8,12 +8,7 @@ module ALU (input clk, rst, input [31:0]val_1, val_2,
   always @ (val_1, val_2, exe_cmd, z_in, c_in, n_in, v_in) begin
     
     alu_result = 32'b00000000000000000000000000000000;
-    sr = 4'b0000;
-    
-    z = 1'b0;
-    c = 1'b0;
-    n = 1'b0;
-    v = 1'b0;
+    sr = 4'b0000; n = 1'b0; c = 1'b0; z = 1'b0; v = 1'b0;
     
     case (exe_cmd)
       4'b0001: begin alu_result = val_2; end
@@ -37,11 +32,10 @@ module ALU (input clk, rst, input [31:0]val_1, val_2,
       4'b0110: begin alu_result = val_1 & val_2; end
       4'b0111: begin alu_result = val_1 | val_2; end
       4'b1000: begin alu_result = val_1 ^ val_2; end
-    //   end
     endcase
 
-    n = alu_result[31];    
     z = alu_result == 32'b00000000000000000000000000000000 ? 1'b1 : 1'b0;
+    n = alu_result[31];    
     sr = {z, c, n, v};
   end
 endmodule
