@@ -3,17 +3,13 @@ module MEM_Stage_Reg ( input clk, rst, wb_en_in, mem_r_en_in, input [31:0]alu_re
 
   always @ (posedge clk, posedge rst) begin
     if (rst) begin
-      wb_en <= 1'b0;
-      mem_r_en <= 1'b0;
+      mem_r_en <= 1'b0; wb_en <= 1'b0; dest <= 4'b0000;
       alu_result <= 32'b00000000000000000000000000000000;
       data_memory_out <= 32'b00000000000000000000000000000000;
-      dest <= 4'b0000;
     end else begin
-      wb_en <= wb_en_in;
-      mem_r_en <= mem_r_en_in;
-      alu_result <= alu_result_in;
+      dest <= dest_in; wb_en <= wb_en_in;
+      alu_result <= alu_result_in; mem_r_en <= mem_r_en_in;
       data_memory_out <= data_memory_out_in;
-      dest <= dest_in;
     end
   end
 
