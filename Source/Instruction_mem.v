@@ -1,8 +1,4 @@
-module Instruction_mem (
-    input clk, rst,
-    input [31:0]PC,
-    output reg [31:0]Instruction
-);
+module Instruction_mem(input clk, rst, input [31:0]PC, output reg [31:0]Instruction);
 
     reg [7:0] _Instruction[191:0];
 
@@ -56,8 +52,7 @@ module Instruction_mem (
             {_Instruction[183], _Instruction[182], _Instruction[181], _Instruction[180]} = 32'b1110_01_0_0100_1_0000_0110_000000010100;
             {_Instruction[187], _Instruction[186], _Instruction[185], _Instruction[184]} = 32'b1110_10_1_0_111111111111111111111111;
             {_Instruction[191], _Instruction[190], _Instruction[189], _Instruction[188]} = 32'b0;
-        end else 
-            Instruction <= {_Instruction[PC + 2'b11], _Instruction[PC + 2'b10], _Instruction[PC + 2'b01], _Instruction[PC + 2'b00]};  
+        end else Instruction <= {_Instruction[PC + 2'b11], _Instruction[PC + 2'b10], _Instruction[PC + 2'b01], _Instruction[PC + 2'b00]};  
   end
     
 endmodule

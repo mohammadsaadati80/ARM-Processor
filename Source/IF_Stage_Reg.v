@@ -9,10 +9,7 @@ module IF_Stage_Reg (input clk, rst, input [31:0]pc_in, instruction_in,
       if (flush) begin
         pc <= 32'b00000000000000000000000000000000;
         instruction <= 32'b11100000000000000000000000000000;
-      end else begin
-        pc <= pc_in;
-        instruction <= instruction_in;
-      end
+      end else begin instruction <= instruction_in; pc <= pc_in; end
     end
   end
 

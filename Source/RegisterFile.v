@@ -12,21 +12,21 @@ module RegisterFile (input clk, rst, input [3:0]src_1, src_2, dest_wb, input [31
   end
   
   initial begin
-    registers[0] = 0;
-	 registers[1] = 1;
-	 registers[2] = 2;
-	 registers[3] = 3;
-	 registers[4] = 4;
-	 registers[5] = 5;
-	 registers[6] = 6;
-	 registers[7] = 7;
-	 registers[8] = 8;
-	 registers[9] = 9;
-	 registers[10] = 10;
-	 registers[11] = 11;
-	 registers[12] = 12;
-	 registers[13] = 13;
-	 registers[14] = 14;
+	registers[0] = 0;
+	registers[1] = 1;
+	registers[2] = 2;
+	registers[3] = 3;
+	registers[4] = 4;
+	registers[5] = 5;
+	registers[6] = 6;
+	registers[7] = 7;
+	registers[8] = 8;
+	registers[9] = 9;
+	registers[10] = 10;
+	registers[11] = 11;
+	registers[12] = 12;
+	registers[13] = 13;
+	registers[14] = 14;
   end
   
 endmodule
