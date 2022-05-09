@@ -17,7 +17,7 @@ module Val2Generator(input clk, rst, input [31:0]rm, input [11:0]shift_operand, 
         case (imm)
           1'b1: begin val_2 = {{eight_immed}, {{24{1'b0}}, {eight_immed}}} >> (rotate_imm * 2); end
           1'b0: begin
-            if (shift_operand[3] == 1'b0) begin
+            if (shift_operand[4] == 1'b0) begin
               case (shift)
                 2'b00: begin val_2 = rm << shift_imm; end
                 2'b01: begin val_2 = rm >> shift_imm; end

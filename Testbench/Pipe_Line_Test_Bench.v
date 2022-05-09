@@ -13,5 +13,4 @@ module Pipe_Line_Test_Bench ();
         #10000 $stop;
     end
 
-    
 endmodule
