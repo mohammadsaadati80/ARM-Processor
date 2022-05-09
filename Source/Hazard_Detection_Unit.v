@@ -2,6 +2,7 @@ module HazardDetectionUnit (input clk, rst, input [3:0]src_1, src_2, exe_dest, i
   input [3:0]mem_dest, input mem_wb_en, two_src, forwarding_mode, mem_read, output reg hazard_detected);
   
   always @ (*) begin
+    hazard_detected = 1'b0;
     if (forwarding_mode) begin
       if (mem_read) begin
         if (exe_wb_en && (src_1 == exe_dest)) hazard_detected = 1'b1;
