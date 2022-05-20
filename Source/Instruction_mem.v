@@ -51,7 +51,7 @@ module Instruction_mem(input clk, rst, input [31:0]PC, output reg [31:0]Instruct
             {_Instruction[179], _Instruction[178], _Instruction[177], _Instruction[176]} = 32'b1110_01_0_0100_1_0000_0101_000000010000;
             {_Instruction[183], _Instruction[182], _Instruction[181], _Instruction[180]} = 32'b1110_01_0_0100_1_0000_0110_000000010100;
             {_Instruction[187], _Instruction[186], _Instruction[185], _Instruction[184]} = 32'b1110_10_1_0_111111111111111111111111;
-            {_Instruction[191], _Instruction[190], _Instruction[189], _Instruction[188]} = 32'b0;
+            // {_Instruction[191], _Instruction[190], _Instruction[189], _Instruction[188]} = 32'b0;
         end else Instruction <= {_Instruction[PC + 2'b11], _Instruction[PC + 2'b10], _Instruction[PC + 2'b01], _Instruction[PC + 2'b00]};  
   end
     
