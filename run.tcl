@@ -4,7 +4,7 @@
 	exec vlib work
 	vmap work work
 	
-	set TB					"Pipe_Line_Test_Bench"
+	set TB					"Test_Bench"
 	set src_path			"Source"
 	
 	set run_time			"-all"
