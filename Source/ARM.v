@@ -1,4 +1,4 @@
-module ARM (input clk, rst);
+module ARM (input clk, rst, forward);
   
   wire branch_tacken, freeze, flush, hazard, wb_wb_en, wb_en_id, mem_r_en_id, mem_w_en_id;
   wire b_id, s_id, imm_id, two_src_id, wb_en_id_reg, mem_r_en_id_reg,mem_w_en_id_reg, b_id_reg, s_id_reg;
@@ -19,7 +19,7 @@ module ARM (input clk, rst);
   wire [31:0]br_addr_exe, val_rm_exe, alu_result_exe_reg, st_val_exe_reg, val_rm_exe_reg;
   wire [31:0] alu_result_mem, data_memory_mem, alu_result_mem_reg, data_memory_out_mem_reg;
 
-  assign forwarding_bit = 1'b1;
+  assign forwarding_bit = forward;
   
   IF_Stage if_stage (clk, rst, b_id_reg, br_addr_exe, hazard, pc, instruction);
   IF_Stage_Reg if_stage_reg (clk, rst, pc, instruction, b_id_reg, hazard, pc_if_reg, instruction_if_reg);
