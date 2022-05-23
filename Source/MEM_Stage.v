@@ -1,6 +1,6 @@
-module MEM_Stage ( input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in,
+module MEM_Stage (input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in,
   input [31:0]alu_result, rm_val, input [3:0]dest_in, output wb_en, mem_r_en, mem_w_en,
-  output [31:0]alu_result_out, data_memory_out, output [3:0]dest, inout [31:0]sram_dq,
+  output [31:0]alu_result_out, data_memory_out, output [3:0]dest, inout [15:0]sram_dq,
   output sram_w_en, output [17:0]sram_address, output ready);
 
   assign dest = dest_in;

@@ -1,5 +1,5 @@
-module MEM_Stage_Reg ( input clk, rst,freeze, wb_en_in, mem_r_en_in, input [31:0]alu_result_in, data_memory_out_in,
-  input [3:0] dest_in, output reg wb_en, mem_r_en, output reg [31:0]alu_result, data_memory_out, output reg [3:0]dest);
+module MEM_Stage_Reg (input clk, rst, freeze, wb_en_in, mem_r_en_in, input [31:0]alu_result_in, data_memory_out_in,
+  input [3:0]dest_in, output reg wb_en, mem_r_en, output reg [31:0]alu_result, data_memory_out, output reg [3:0]dest);
 
   always @ (posedge clk, posedge rst) begin
     if (rst) begin

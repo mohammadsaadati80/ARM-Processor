@@ -1,41 +1,49 @@
-module SRAM_Controller (input clk, rst, read_en, write_en, input [31:0]address, input [31:0]write_data,
-    inout [31:0]sram_dq, output sram_w_en, output [31:0]read_data, output [17:0]sram_address, output ready);
+module SRAM_Controller (input clk, rst, wr_en, rd_en,
+  input [31:0]address, writeData, output reg [31:0]readData,
+  output ready, inout [15:0] SRAM_DQ, output [17:0]SRAM_ADDR,
+  output reg SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N);
+
+
+  reg [2:0]ps, ns;
+  wire [31:0]address_t;
+  reg [15:0]SRAM_DQ_reg;
+  reg [17:0]SRAM_ADDR_reg;
+  wire [17:0]address1, address2;
   
-  reg [1:0]ps, ns;
-  reg [2:0]counter;
-  
-  wire [31:0]data_address;
+  parameter one = 3'd0, two = 3'd1, WR2 = 3'd2, three = 3'd3, four = 3'd4;
 
-  assign read_data = sram_dq;
-  assign data_address = address - 1024;
-  assign sram_address = data_address[18:2];
-  assign sram_w_en = ((ns == 2'b10) && (counter < 3'b100)) ? 1'b0 : 1'b1;
-  assign sram_dq = ((ns == 2'b10) && (counter < 3'b100)) ? write_data : 32'bzzzz_zzzz_zzzz_zzzz_zzzz_zzzz_zzzz_zzzz;
+  assign address_t = address - 1024;
+  assign address1 = {address_t[18:2], 1'b0};
+  assign address2 = {address_t[18:2], 1'b1};
 
-  assign ready = ((ns == 2'b01) && (counter < 3'b100)) ? 1'b0 :
-                 ((ns == 2'b10) && (counter < 3'b100)) ? 1'b0 :
-                 1'b1;
-
-  always @ (posedge clk, posedge rst) begin
-    if (rst) counter <= 3'b000;
-    else begin
-      if (((ps == 2'b01) || (ps == 2'b10)) && (counter < 3'b100))
-        counter <= counter + 3'b001;
-      else counter <= 3'b000;
-    end
-  end
-
-  always @ (ps, read_en, write_en, counter) begin
-    case (ps)
-      2'b00: ns = read_en ? 2'b01 : (write_en ? 2'b10 : 2'b00);
-      2'b01: ns = (counter < 3'b100) ? 2'b01 : 2'b00;
-      2'b10: ns = (counter < 3'b100) ? 2'b10 : 2'b00;
+  always @ (posedge clk) begin
+    SRAM_UB_N = 1 ; SRAM_LB_N = 1 ; SRAM_CE_N = 1 ; SRAM_OE_N = 1 ; SRAM_WE_N = 1;
+    case(ps)
+      one: begin
+        if(wr_en) begin SRAM_DQ_reg <= writeData[31:16]; SRAM_ADDR_reg <= address2; SRAM_WE_N <= 1'b0; end
+        else if(rd_en) begin readData[15:0] <= SRAM_DQ; end
+      end
+      two: begin
+        if(wr_en) begin SRAM_DQ_reg <= writeData[15:0]; SRAM_ADDR_reg <= address1; SRAM_WE_N <= 1'b0; end
+        else if(rd_en) begin readData[31:16] <= SRAM_DQ; end
+      end
     endcase
   end
 
-  always @ (posedge clk, posedge rst) begin
-    if (rst) ps <= 2'b00;
+  always @ (ps) begin
+    if(ps == four) ns = one;
+    else ns = ps + 1;
+  end
+
+  always @ (posedge clk) begin
+    if(rst | (!wr_en & !rd_en)) ps <= one;
     else ps <= ns;
   end
+
+  assign SRAM_DQ = (wr_en) ? SRAM_DQ_reg : 16'bzzzzzzzzzzzzzzzz;
+  assign ready = ((ps == one || ps == three || ps == WR2 || ps == two) && (wr_en | rd_en)) ? 0 : 1;
+  assign SRAM_ADDR = (wr_en) ? SRAM_ADDR_reg :
+                 (ps == one) ? address1 :
+                 (ps == two) ? address2 : 16'b0;
 
 endmodule
