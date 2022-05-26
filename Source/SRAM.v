@@ -7,10 +7,8 @@ module SRAM(inout [15:0]SRAM_DQ, input [17:0]SRAM_ADDR,
   reg [15:0] data[0:511];
 
   assign address_t = SRAM_ADDR[8:0];
-  assign SRAM_DQ = SRAM_WE_N ? data[address_t]: 16'bz;
+  assign SRAM_DQ = SRAM_WE_N ? data[SRAM_ADDR]: 16'bz;
 
-  always @(*) begin
-      if (SRAM_WE_N == `SRAM_ENABLE) begin data[address_t] <= SRAM_DQ;
-  end
+  always @(*) if (SRAM_WE_N == 1'b0) data[address_t] <= SRAM_DQ;
 
 endmodule

@@ -9,7 +9,7 @@ module MEM_Stage (input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in,
   assign mem_w_en = mem_w_en_in;
   assign alu_result_out = alu_result; 
   
-  SRAM_Controller sc(clk, rst, mem_w_en_in, mem_r_en_in, rm_val, alu_result, data_memory_out, ready, sram_dq,
+  SRAM_Controller sc(clk, rst, mem_w_en_in, mem_r_en_in, alu_result, rm_val, data_memory_out, ready, sram_dq,
     sram_address, SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N);
   // Data_Memory data_memory (clk, rst, mem_r_en_in, mem_w_en_in, alu_result, rm_val, data_memory_out);
 
