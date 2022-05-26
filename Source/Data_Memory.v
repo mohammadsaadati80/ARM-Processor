@@ -5,7 +5,7 @@ module Data_Memory (input clk, mem_r_en, mem_w_en,
   wire [31:0] aligned_address;
   assign aligned_address = ((address - 1024) >> 2);
 
-  always @ (posedge clk, posedge rst)
+  always @ (posedge clk)
     if (mem_w_en) memory[aligned_address] <= data;
 
   assign data_memory_out = (mem_r_en) ? memory[aligned_address] : data_memory_out;

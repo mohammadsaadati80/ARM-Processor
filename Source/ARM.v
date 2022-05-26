@@ -1,4 +1,5 @@
-module ARM (input clk, rst, forward, inout [31:0]sram_dq, output sram_we_n, output [16:0]sram_address);
+module ARM (input clk, rst, forward, inout [15:0]sram_dq, output [17:0]sram_address,
+  output SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N);
   
   wire branch_tacken, freeze, flush, hazard, wb_wb_en, wb_en_id, mem_r_en_id, mem_w_en_id;
   wire b_id, s_id, imm_id, two_src_id, wb_en_id_reg, mem_r_en_id_reg,mem_w_en_id_reg, b_id_reg, s_id_reg;
@@ -40,8 +41,8 @@ module ARM (input clk, rst, forward, inout [31:0]sram_dq, output sram_we_n, outp
   
   EXE_Stage exe_stage (clk, rst, exe_cmd_id_reg, wb_en_id_reg, mem_r_en_id_reg, mem_w_en_id_reg,
                        pc_id_reg, value_rn_id_reg, value_rm_id_reg, imm_id_reg, shift_operand_id_reg, imm_signed_24_id_reg,
-                       sr_id_reg, dest_id_reg, sel_src_1, sel_src_2, alu_result_exe_reg, wb_value, wb_en_exe, mem_r_en_exe, mem_w_en_exe, alu_result_exe, br_addr_exe, status_exe,
-                       val_rm_exe, dest_exe);
+                       sr_id_reg, dest_id_reg, sel_src_1, sel_src_2, alu_result_exe_reg, wb_value, wb_en_exe, mem_r_en_exe,
+                       mem_w_en_exe, alu_result_exe, br_addr_exe, status_exe, val_rm_exe, dest_exe);
 
   Forwarding_Unit forwardingUnit (clk, rst, src_1, src_2, wb_en_mem, dest_mem, wb_wb_en, wb_dest, sel_src_1, sel_src_2);
     
@@ -53,7 +54,8 @@ module ARM (input clk, rst, forward, inout [31:0]sram_dq, output sram_we_n, outp
 
   MEM_Stage mem_stage (clk, rst, wb_en_exe_reg, mem_r_en_exe_reg, mem_w_en_exe_reg, alu_result_exe_reg,
                        val_rm_exe_reg, dest_exe_reg, wb_en_mem, mem_r_en_mem, mem_w_en_mem, alu_result_mem,
-                       data_memory_mem, dest_mem, sram_dq, sram_we_n, sram_address, ready);
+                       data_memory_mem, dest_mem, sram_dq, SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N,
+                       sram_address, ready);
 
   MEM_Stage_Reg mem_stage_reg (clk, rst, ~ready, wb_en_mem, mem_r_en_mem, alu_result_mem, data_memory_mem, dest_mem,
                                wb_en_mem_reg, mem_r_en_mem_reg, alu_result_mem_reg, data_memory_out_mem_reg, dest_mem_reg);

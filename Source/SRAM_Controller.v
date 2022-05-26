@@ -10,7 +10,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   reg [17:0]SRAM_ADDR_reg;
   wire [17:0]address1, address2;
   
-  parameter one = 3'd0, two = 3'd1, WR2 = 3'd2, three = 3'd3, four = 3'd4;
+  parameter one = 3'd0, two = 3'd1, three = 3'd2, four = 3'd3, five = 3'd4;
 
   assign address_t = address - 1024;
   assign address1 = {address_t[18:2], 1'b0};
@@ -31,7 +31,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   end
 
   always @ (ps) begin
-    if(ps == four) ns = one;
+    if(ps == five) ns = one;
     else ns = ps + 1;
   end
 
@@ -41,7 +41,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   end
 
   assign SRAM_DQ = (wr_en) ? SRAM_DQ_reg : 16'bzzzzzzzzzzzzzzzz;
-  assign ready = ((ps == one || ps == three || ps == WR2 || ps == two) && (wr_en | rd_en)) ? 0 : 1;
+  assign ready = ((ps == one || ps == four || ps == three || ps == two) && (wr_en | rd_en)) ? 0 : 1;
   assign SRAM_ADDR = (wr_en) ? SRAM_ADDR_reg :
                  (ps == one) ? address1 :
                  (ps == two) ? address2 : 16'b0;
