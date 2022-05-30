@@ -13,11 +13,11 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   parameter one = 3'd0, two = 3'd1, three = 3'd2, four = 3'd3, five = 3'd4;
 
   assign address_t = address - 1024;
-  assign address1 = {address_t[18:2], 1'b0};
-  assign address2 = {address_t[18:2], 1'b1};
+  assign address1 = {address_t[17:1], 1'b0};
+  assign address2 = {address_t[17:1], 1'b1};
 
   always @ (posedge clk) begin
-    SRAM_UB_N = 1 ; SRAM_LB_N = 1 ; SRAM_CE_N = 1 ; SRAM_OE_N = 1 ; SRAM_WE_N = 1;
+    SRAM_UB_N = 0 ; SRAM_LB_N = 0 ; SRAM_CE_N = 0 ; SRAM_OE_N = 0 ; SRAM_WE_N = 1;
     case(ps)
       one: begin
         if(wr_en) begin SRAM_DQ_reg <= writeData[31:16]; SRAM_ADDR_reg <= address2; SRAM_WE_N <= 1'b0; end
