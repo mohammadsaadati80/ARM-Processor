@@ -41,7 +41,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   end
 
   assign SRAM_DQ = (wr_en) ? SRAM_DQ_reg : 16'bzzzzzzzzzzzzzzzz;
-  assign ready = ((ps == one || ps == four || ps == three || ps == two) && (wr_en | rd_en)) ? 0 : 1;
+  assign ready = ((ps == one || ps == four || ps == three || ps == two || ps == five) && (wr_en | rd_en)) ? 0 : 1;
   assign SRAM_ADDR = (wr_en) ? SRAM_ADDR_reg :
                  (ps == one) ? address1 :
                  (ps == two) ? address2 : 16'b0;
