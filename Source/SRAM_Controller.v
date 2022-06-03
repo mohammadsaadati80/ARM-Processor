@@ -1,6 +1,6 @@
 module SRAM_Controller (input clk, rst, wr_en, rd_en,
   input [31:0]address, writeData, output reg [63:0]readData,
-  output ready, inout [15:0] SRAM_DQ, output [17:0]SRAM_ADDR,
+  output ready, inout [15:0]SRAM_DQ, output [17:0]SRAM_ADDR,
   output reg SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N);
 
 
@@ -14,13 +14,13 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
 
   assign address_t = address - 1024;
 
-  assign w_address1 =  {address_temp[18:2], 1'b0};
-  assign w_address2 =  {address_temp[18:2], 1'b1};
+  assign w_address1 =  {address_t[18:2], 1'b0};
+  assign w_address2 =  {address_t[18:2], 1'b1};
 
-  assign address1 = {address_temp[18:3], 2'b00};
-  assign address2 = {address_temp[18:3], 2'b01};
-  assign address3 = {address_temp[18:3], 2'b10};
-  assign address4 = {address_temp[18:3], 2'b11};
+  assign address1 = {address_t[18:3], 2'b00};
+  assign address2 = {address_t[18:3], 2'b01};
+  assign address3 = {address_t[18:3], 2'b10};
+  assign address4 = {address_t[18:3], 2'b11};
 
   always @ (posedge clk) begin
     SRAM_UB_N = 0 ; SRAM_LB_N = 0 ; SRAM_CE_N = 0 ; SRAM_OE_N = 0 ; SRAM_WE_N = 1;
@@ -55,9 +55,9 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   assign SRAM_DQ = (wr_en) ? SRAM_DQ_reg : 16'bzzzzzzzzzzzzzzzz;
   assign ready = ((!wr_en & !rd_en) | ((ps == one || ps == two || ps == three || ps == four) && (wr_en | rd_en))) ? 0 : 1;
   assign SRAM_ADDR = (wr_en) ? SRAM_ADDR_reg :
-                 (ps == WR0) ? address1 :
-                 (ps == WR1) ? address2 :
-                 (ps == WR2) ? address3 :
-                 (ps == WR3) ? address4 : 16'b0;
+                      (ps == one) ? address1 :
+                      (ps == two) ? address2 :
+                    (ps == three) ? address3 :
+                     (ps == four) ? address4 : 16'b0;
 
 endmodule
