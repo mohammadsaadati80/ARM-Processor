@@ -18,9 +18,6 @@ module MEM_Stage (input clk, rst, wb_en_in, mem_r_en_in, mem_w_en_in,
   SRAM_Controller sc(clk, rst, cache_write, cache_read, cache_sram_address, cache_sram_wdata, sram_read_data, sram_ready, sram_dq, sram_address,
                     SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N);
 
-  // Cache_Controller cc(clk, rst, mem_r_en_in, mem_w_en_in, alu_result, rm_val, data_memory_out, sram_read_data, sram_ready, cache_ready,
-                      // cache_sram_address, cache_sram_wdata, cache_write, cache_read);
-
   Cache_Controller cc(.clk(clk), .rst(rst), .MEM_R_EN(mem_r_en_in), .MEM_W_EN(mem_w_en_in), .Address(alu_result), .wdata(rm_val), .rdata(data_memory_out),
                       .sram_rdata(sram_read_data), .sram_ready(sram_ready), .ready(cache_ready), .sram_address(cache_sram_address),
                       .sram_wdata(cache_sram_wdata), .write(cache_write), .read(cache_read));
