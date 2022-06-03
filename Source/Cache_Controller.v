@@ -4,22 +4,22 @@ module Cache_Controller (input clk, rst, MEM_R_EN, MEM_W_EN, input [31:0]Address
 
   reg [148:0]cache[63:0];
 
+  assign offset = Address[2:0];
   assign tag_address = Address[17:9];
   assign index_address = Address[8:3];
-  assign offset = Address[2:0];
 
+  assign LRU = cache[index_address][148];
   assign way1 = cache[index_address][73:0];
   assign way0 = cache[index_address][147:74];
-  assign LRU = cache[index_address][148];
 
-  assign hit0 =(way0[73:65] == tag_address & way0[0]) ? 1:0;
-  assign hit1 =(way1[73:65] == tag_address & way1[0]) ? 1:0;
+  assign hit0 =(way0[73:65] == tag_address & way0[0]) ? 1 : 0;
+  assign hit1 =(way1[73:65] == tag_address & way1[0]) ? 1 : 0;
 
   assign ready = ((hit0 | hit1 | !MEM_R_EN) & !MEM_W_EN);
 
   integer i;
-  always @ ( posedge clk ) begin
-    if(rst) for(i = 0; i < 64; i = i + 1) cache[i] = 149'b0;
+  always @ (posedge clk) begin
+    if(rst) for(i = 0 ; i < 64 ; i = i + 1) cache[i] = 149'b0;
     else begin
       if(MEM_W_EN) begin
         if(hit0) cache[index_address][74] = 0;
