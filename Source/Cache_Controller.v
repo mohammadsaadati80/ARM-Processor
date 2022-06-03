@@ -1,4 +1,4 @@
-module cache_controller (
+module Cache_Controller (
           input clk,
           input rst,
           input MEM_R_EN,
