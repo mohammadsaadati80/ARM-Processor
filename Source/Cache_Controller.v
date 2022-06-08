@@ -27,7 +27,7 @@ module Cache_Controller (input clk, rst, MEM_R_EN, MEM_W_EN, input [31:0]Address
       end
       if(MEM_R_EN & ready) cache[index_address][148] = hit0 ? 1 : 0;
       read = (!ready & MEM_R_EN);
-      write = (!sram_ready & MEM_W_EN);
+      write = MEM_W_EN;
       if(!ready & MEM_R_EN & sram_ready)begin
         if(LRU == 0)begin
           cache[index_address][64+74:1+74] = sram_rdata;

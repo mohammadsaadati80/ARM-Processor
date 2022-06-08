@@ -10,7 +10,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   reg [17:0]SRAM_ADDR_reg;
   wire [17:0]address1, address2, address3, address4, w_address1, w_address2;
   
-  parameter one = 3'd0, two = 3'd1, three = 3'd2, four = 3'd3, five = 3'd4;
+  parameter one = 3'd0, two = 3'd1, three = 3'd2, four = 3'd3, five = 3'd4, six = 3'd5;
 
   assign address_t = address - 1024;
 
@@ -22,7 +22,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   assign address3 = {address_t[18:3], 2'b10};
   assign address4 = {address_t[18:3], 2'b11};
 
-  always @ (posedge clk) begin
+  always @ (posedge clk, ps) begin
     SRAM_UB_N = 0 ; SRAM_LB_N = 0 ; SRAM_CE_N = 0 ; SRAM_OE_N = 0 ; SRAM_WE_N = 1; ready = 0;
     case(ps)
       one: begin
@@ -40,19 +40,19 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
         if(rd_en) begin readData[63:48] <= SRAM_DQ; end
         // ready <= 1; 
       end
-      five: begin
+      six: begin
         begin ready <= 1; end
       end
     endcase
   end
 
   always @ (ps) begin
-    if(ps == five) ns = one;
+    if(ps == six) ns = one;
     else ns = ps + 1;
   end
 
   always @ (posedge clk) begin
-    if(rst | (!wr_en & !rd_en)) ps <= one;
+    if(rst) ps <= one;
     else ps <= ns;
   end
 
