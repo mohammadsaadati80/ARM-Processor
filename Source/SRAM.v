@@ -4,9 +4,9 @@
 
 module SRAM (input clk, rst, sram_we_n, input [17:0]sram_address, inout [15:0]sram_dq);
   
-  reg [31:0]memory[0:511];
+  reg [15:0]memory[0:511];
   
-  assign #15 sram_dq = sram_we_n ? memory[sram_address] : 16'bzzzzzzzzzzzzzzzz;
+  assign sram_dq = sram_we_n ? memory[sram_address] : 16'bzzzzzzzzzzzzzzzz;
   
   always @ (posedge clk) begin
     if (!sram_we_n) memory[sram_address] = sram_dq;

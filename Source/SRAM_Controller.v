@@ -1,6 +1,6 @@
 module SRAM_Controller (input clk, rst, wr_en, rd_en,
   input [31:0]address, writeData, output reg [63:0]readData,
-  output ready, inout [15:0]SRAM_DQ, output [17:0]SRAM_ADDR,
+  output reg ready, inout [15:0]SRAM_DQ, output [17:0]SRAM_ADDR,
   output reg SRAM_UB_N, SRAM_LB_N, SRAM_WE_N, SRAM_CE_N, SRAM_OE_N);
 
 
@@ -23,7 +23,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   assign address4 = {address_t[18:3], 2'b11};
 
   always @ (posedge clk) begin
-    SRAM_UB_N = 0 ; SRAM_LB_N = 0 ; SRAM_CE_N = 0 ; SRAM_OE_N = 0 ; SRAM_WE_N = 1;
+    SRAM_UB_N = 0 ; SRAM_LB_N = 0 ; SRAM_CE_N = 0 ; SRAM_OE_N = 0 ; SRAM_WE_N = 1; ready = 0;
     case(ps)
       one: begin
         if(wr_en) begin SRAM_DQ_reg <= writeData[31:16]; SRAM_ADDR_reg <= w_address2; SRAM_WE_N <= 1'b0; end
@@ -38,6 +38,10 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
       end
       four: begin
         if(rd_en) begin readData[63:48] <= SRAM_DQ; end
+        // ready <= 1; 
+      end
+      five: begin
+        begin ready <= 1; end
       end
     endcase
   end
@@ -53,7 +57,7 @@ module SRAM_Controller (input clk, rst, wr_en, rd_en,
   end
 
   assign SRAM_DQ = (wr_en) ? SRAM_DQ_reg : 16'bzzzzzzzzzzzzzzzz;
-  assign ready = ((!wr_en & !rd_en) | ((ps == one || ps == two || ps == three || ps == four) && (wr_en | rd_en))) ? 0 : 1;
+  // assign ready = ((!wr_en & !rd_en) | (((ps == one) || (ps == two) || (ps == three) || (ps == four)) && (wr_en | rd_en))) ? 0 : 1;
   assign SRAM_ADDR = (wr_en) ? SRAM_ADDR_reg :
                       (ps == one) ? address1 :
                       (ps == two) ? address2 :
