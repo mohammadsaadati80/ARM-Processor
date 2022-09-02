@@ -1,6 +1,6 @@
 # Computer Architecture Lab Course Projects
 
-This repository contains my Computer Architecture Lab Course Projects (Spring 2022) at University of Tehran.
+This repository contains my Computer Architecture Lab Course Projects at University of Tehran.
 
 1. [ARM](https://github.com/mohammadsaadati80/Computer_Architecture_Lab_Course_Projects/tree/21b08763c1839af7a2f524f691d70c5a37b15277)
 2. [Forwarding](https://github.com/mohammadsaadati80/Computer_Architecture_Lab_Course_Projects/tree/44ca20d75479c81724d79161328639525f8a6cbd)
